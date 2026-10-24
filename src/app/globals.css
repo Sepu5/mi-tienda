@@ -1,0 +1,44 @@
+.avatar {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.link-none {
+    text-decoration: none;
+    color: black;
+}
+
+.link-none:hover {
+    text-decoration: none;
+    color: blue;
+}
+
+.precio-descuento {
+    font-size: 0.9rem;
+    color: #6c757d; /* Color gris para el precio anterior */
+}
+.precio-nuevo {
+    color: #ff9900; /* Color destacado para el precio nuevo */
+    font-size: 1.4rem; /* Tamaño de fuente más grande para el precio nuevo */
+}
+
+.card-producto {
+    transition: box-shadow 0.3s ease; /* Suaviza la transición de la sombra */
+}
+.card-producto:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+    cursor: pointer;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "|";
+    color: #6c757d;
+    padding: 0 8px;
+}
+.breadcrumb-item + .breadcrumb-item:last-child::before {
+    content: ">";
+    color: #6c757d;
+    padding: 0 8px;
+}
