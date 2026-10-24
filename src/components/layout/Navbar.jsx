@@ -1,5 +1,6 @@
 import Link from "next/link";
 import MobileMenu from "./MobileMenu";
+import NavLink from "./NavLink";
 
 const categorias = ["Acción", "Aventura", "Estrategia"];
 
@@ -41,7 +42,7 @@ export default function Navbar() {
           <div className="collapse navbar-collapse justify-content-center">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link active" href="/"><strong>Home</strong></Link>
+                <NavLink href="/"><strong>Home</strong></NavLink>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -55,10 +56,10 @@ export default function Navbar() {
                   ))}
                 </ul>
               </li>
-              <li className="nav-item"><Link className="nav-link" href="/ofertas">Ofertas</Link></li>
-              <li className="nav-item"><Link className="nav-link" href="/nosotros">Nosotros</Link></li>
-              <li className="nav-item"><Link className="nav-link" href="/blog">Blog</Link></li>
-              <li className="nav-item"><Link className="nav-link" href="/contacto">Contacto</Link></li>
+              <li className="nav-item"><NavLink href="/ofertas">Ofertas</NavLink></li>
+              <li className="nav-item"><NavLink href="/nosotros">Nosotros</NavLink></li>
+              <li className="nav-item"><NavLink href="/blog">Blog</NavLink></li>
+              <li className="nav-item"><NavLink href="/contacto">Contacto</NavLink></li>
               <li className="nav-item">
                 {/* El total se hará dinámico en la tarea del carrito */}
                 <Link className="btn btn-success ms-5" href="/carrito">

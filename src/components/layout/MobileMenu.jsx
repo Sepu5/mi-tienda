@@ -1,9 +1,22 @@
+"use client";
+
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const categorias = ["Acción", "Aventura", "Estrategia"];
 
-// Menú lateral (offcanvas) que se abre en celulares con el botón de la Navbar.
 export default function MobileMenu() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const el = document.getElementById("offcanvasMobileMenu");
+    if (!el) return;
+    import("bootstrap").then(({ Offcanvas }) => {
+      Offcanvas.getInstance(el)?.hide();
+    });
+  }, [pathname]);
+
   return (
     <div
       className="offcanvas offcanvas-start"
@@ -17,7 +30,6 @@ export default function MobileMenu() {
       </div>
 
       <div className="offcanvas-body">
-        {/* Tarjeta del usuario */}
         <div className="card">
           <div className="row g-0">
             <div className="col-4 d-flex align-items-center justify-content-center">
