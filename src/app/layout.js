@@ -3,6 +3,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./globals.css";
 import BootstrapClient from "@/components/BootstrapClient";
 import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar"; 
 
 export const metadata = {
   title: "Tienda de Videojuegos",
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body>
+        <Navbar />
         <main>{children}</main>
         <Footer />
         <BootstrapClient />
