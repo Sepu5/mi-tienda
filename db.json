@@ -1,0 +1,224 @@
+{
+  "productos": [
+    {
+      "id": 1,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "The Legend of Zelda",
+      "categoria": "Aventura",
+      "descripcion": "Juego de acción y aventura con mundo abierto.",
+      "precio_descuento": 6999,
+      "precio_nuevo": 5999,
+      "stock": 19,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 2,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "Super Mario Odyssey",
+      "categoria": "Plataforma",
+      "descripcion": "Aventura de plataformas 3D en varios mundos.",
+      "precio_descuento": 5999,
+      "precio_nuevo": 4999,
+      "stock": 17,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 3,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "Minecraft",
+      "categoria": "Sandbox",
+      "descripcion": "Juego de construcción y aventuras en mundo abierto.",
+      "precio_descuento": 2999,
+      "precio_nuevo": 2695,
+      "stock": 13,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 4,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "Fortnite",
+      "categoria": "Battle Royale",
+      "descripcion": "Juego multijugador masivo en línea de supervivencia.",
+      "precio_descuento": 999,
+      "precio_nuevo": 0,
+      "stock": 10,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 5,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "Overwatch",
+      "categoria": "Shooter",
+      "descripcion": "Juego de disparos multijugador en equipo.",
+      "precio_descuento": 2999,
+      "precio_nuevo": 1999,
+      "stock": 18,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 6,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "Red Dead Redemption 2",
+      "categoria": "Aventura",
+      "descripcion": "Juego de acción y aventuras en el lejano oeste.",
+      "precio_descuento": 6999,
+      "precio_nuevo": 5999,
+      "stock": 20,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 7,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "Among Us",
+      "categoria": "Misterio",
+      "descripcion": "Juego multijugador de deducción social.",
+      "precio_descuento": 699,
+      "precio_nuevo": 499,
+      "stock": 30,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 8,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "The Witcher 3",
+      "categoria": "RPG",
+      "descripcion": "Juego de rol de acción en un mundo abierto.",
+      "precio_descuento": 4999,
+      "precio_nuevo": 3999,
+      "stock": 12,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 9,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "Animal Crossing",
+      "categoria": "Simulación",
+      "descripcion": "Juego de simulación de vida en una isla.",
+      "precio_descuento": 6999,
+      "precio_nuevo": 5999,
+      "stock": 7,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 10,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "Call of Duty: Warzone",
+      "categoria": "Shooter",
+      "descripcion": "Juego de disparos y estrategia multijugador.",
+      "precio_descuento": 1999,
+      "precio_nuevo": 0,
+      "stock": 5,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 11,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "Hollow Knight",
+      "categoria": "Plataforma",
+      "descripcion": "Juego de plataformas y aventuras en 2D.",
+      "precio_descuento": 1999,
+      "precio_nuevo": 1499,
+      "stock": 24,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 12,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "Dark Souls III",
+      "categoria": "RPG",
+      "descripcion": "Juego de rol de acción en un entorno oscuro.",
+      "precio_descuento": 6999,
+      "precio_nuevo": 5999,
+      "stock": 14,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 13,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "FIFA 21",
+      "categoria": "Deportes",
+      "descripcion": "Simulador de fútbol con modos de juego realistas.",
+      "precio_descuento": 5999,
+      "precio_nuevo": 4999,
+      "stock": 2,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 14,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "Mortal Kombat 11",
+      "categoria": "Lucha",
+      "descripcion": "Juego de lucha con gráficos avanzados.",
+      "precio_descuento": 6999,
+      "precio_nuevo": 5999,
+      "stock": 10,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 15,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "The Sims 4",
+      "categoria": "Simulación",
+      "descripcion": "Juego de simulación de vida con creación de personajes.",
+      "precio_descuento": 4999,
+      "precio_nuevo": 3999,
+      "stock": 12,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 16,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "Assassin's Creed Valhalla",
+      "categoria": "Aventura",
+      "descripcion": "Juego de acción y aventuras ambientado en la era vikinga.",
+      "precio_descuento": 6999,
+      "precio_nuevo": 5999,
+      "stock": 100,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 17,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "Cuphead",
+      "categoria": "Plataforma",
+      "descripcion": "Juego de plataformas inspirado en dibujos animados.",
+      "precio_descuento": 2999,
+      "precio_nuevo": 1999,
+      "stock": 3,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 18,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "Star Wars Jedi: Fallen Order",
+      "categoria": "Aventura",
+      "descripcion": "Juego de acción y aventuras en el universo Star Wars.",
+      "precio_descuento": 4999,
+      "precio_nuevo": 3999,
+      "stock": 12,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 19,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "Ghost of Tsushima",
+      "categoria": "Aventura",
+      "descripcion": "Juego de acción y aventuras ambientado en el Japón feudal.",
+      "precio_descuento": 6999,
+      "precio_nuevo": 5999,
+      "stock": 10,
+      "link": "/productos/producto1.html"
+    },
+    {
+      "id": 20,
+      "imagen": "https://placehold.co/400x300?text=Videojuego",
+      "nombre": "Cyberpunk 2077",
+      "categoria": "RPG",
+      "descripcion": "Juego de rol y acción en un futuro distópico.",
+      "precio_descuento": 6999,
+      "precio_nuevo": 5999,
+      "stock": 5,
+      "link": "/productos/producto1.html"
+    }
+  ]
+}
