@@ -1,6 +1,7 @@
 import Link from "next/link";
 import MobileMenu from "./MobileMenu";
 import NavLink from "./NavLink";
+import BotonCarrito from "./BotonCarrito";
 
 const categorias = ["Acción", "Aventura", "Estrategia"];
 
@@ -61,10 +62,7 @@ export default function Navbar() {
               <li className="nav-item"><NavLink href="/blog">Blog</NavLink></li>
               <li className="nav-item"><NavLink href="/contacto">Contacto</NavLink></li>
               <li className="nav-item">
-                {/* El total se hará dinámico en la tarea del carrito */}
-                <Link className="btn btn-success ms-5" href="/carrito">
-                  <strong><i className="bi bi-cart4"></i> Carrito $0</strong>
-                </Link>
+                <BotonCarrito />
               </li>
             </ul>
           </div>
