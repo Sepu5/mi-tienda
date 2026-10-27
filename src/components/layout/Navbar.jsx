@@ -21,8 +21,9 @@ export default function Navbar() {
             </form>
           </div>
           <div className="d-flex">
-            <Link href="/iniciar-sesion" className="btn btn-outline-primary ms-2">Iniciar Sesión</Link>
-            <Link href="/crear-sesion" className="btn btn-primary ms-2">Crear Cuenta</Link>
+            <Link href="/iniciar-sesion" className="btn btn-outline-primary ms-2 d-none d-md-inline-block">Iniciar Sesión</Link>
+            <Link href="/crear-sesion" className="btn btn-primary ms-2 d-none d-md-inline-block">Crear Cuenta</Link>
+            <BotonCarrito className="btn btn-success d-lg-none ms-2" compacto />
             <button
               className="btn btn-primary d-lg-none ms-2"
               type="button"
