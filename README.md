@@ -400,8 +400,8 @@ main
       ├── tarea/formulario-compra
       ├── tarea/pruebas
       ├── tarea/relleno-blog
-      ├── tarea/arreglo-dependencias
       ├── tarea/menu-movil
+      ├── tarea/arreglo-dependencias
       └── tarea/documentacion
 ```
 
@@ -421,8 +421,8 @@ Cada tarea se integra con un Pull Request hacia `Desarrollo` que **revisa y apru
 | #8 | `tarea/formulario-compra` | Formulario de contacto, compra, compra exitosa y compra con error |
 | #9 | `tarea/pruebas` | Configuración de QUnit y pruebas |
 | #10 | `tarea/relleno-blog` | Contenido del blog |
-| #11 | `tarea/arreglo-dependencias` | Arreglo de la versión de `jsdom` para que `npm install` funcione en una instalación limpia |
-| #12 | `tarea/menu-movil` | Carrito y todos los links en el menú del celular |
+| #11 | `tarea/menu-movil` | Carrito y todos los links en el menú del celular |
+| #12 | `tarea/arreglo-dependencias` | Arreglo de la versión de `jsdom` para que `npm install` funcione en una instalación limpia |
 | #13 | `tarea/documentacion` | Este README |
 
 Los mensajes de commit son cortos y describen lo que se hizo (por ejemplo, "Agrego el navbar y el footer como componentes").
