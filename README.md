@@ -451,7 +451,7 @@ Nos organizamos con un tablero de Trello: [mi-tienda-Fullstack2](https://trello.
 
 ## Limitaciones conocidas
 
-- El inicio de sesión y el registro son simulados: no hay sesión de usuario ni perfil, y los datos no se guardan.
+- El inicio de sesión y el registro son simulados (validan los datos, pero no hay sesión de usuario ni perfil), igual que en la plantilla original, donde los usuarios estaban escritos en el código y el perfil era solo diseño.
 - Solo la Home usa la fake-api; el detalle de producto, Ofertas, Categorías y el carrito usan `src/data/productos.js`.
 - El buscador del navbar todavía no filtra productos y los links de las categorías llevan a `/categorias` completo.
 

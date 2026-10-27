@@ -69,9 +69,10 @@ export default function Carrusel() {
                 );
               })}
             </div>
-            <div className="carousel-caption d-none d-md-block">
+            {/* Fondo oscuro semitransparente para que el texto se lea sobre las cartas */}
+            <div className="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 px-3 py-2 mb-4">
               <h5>{slide.titulo}</h5>
-              <p>{slide.texto}</p>
+              <p className="mb-0">{slide.texto}</p>
             </div>
           </div>
         ))}
