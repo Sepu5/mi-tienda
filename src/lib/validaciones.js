@@ -1,4 +1,4 @@
-// Reglas de validación compartidas por Iniciar sesión y Crear cuenta.
+// Reglas de validación de los formularios (iniciar sesión, crear cuenta, contacto y compra).
 // Cada función devuelve un objeto de errores: { campo: "mensaje" }.
 // Si el objeto está vacío, el formulario es válido.
 
@@ -78,7 +78,12 @@ export function validarCompra({
 }) {
   return limpiar({
     nombre: validarTexto(nombre, "tu nombre", 2),
-    apellidos: validarTexto(apellidos, "tus apellidos", 2),
+    // "Apellidos" es plural, por eso el mensaje de largo se escribe aparte
+    apellidos: !apellidos.trim()
+      ? "Debes escribir tus apellidos."
+      : apellidos.trim().length < 2
+        ? "Los apellidos deben tener al menos 2 caracteres."
+        : "",
     correo: validarCorreo(correo),
     calle: validarTexto(calle, "la calle", 5),
     // Opcionales: solo se revisa el largo máximo

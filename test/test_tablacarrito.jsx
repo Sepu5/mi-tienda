@@ -10,8 +10,8 @@ import { render, screen, fireEvent, cleanup, within } from "@testing-library/rea
 import TablaCarrito from "../src/components/carrito/TablaCarrito.jsx";
 import { CartProvider } from "../src/context/CartContext.jsx";
 
-const zelda = { id: 1, imagen: "x.png", nombre: "The Legend of Zelda", precio_nuevo: 5999, stock: 19, cantidad: 2 };
-const fifa = { id: 13, imagen: "x.png", nombre: "FIFA 21", precio_nuevo: 4999, stock: 2, cantidad: 1 };
+const charmander = { id: 1, imagen: "x.png", nombre: "Charmander", precio_nuevo: 5999, stock: 19, cantidad: 2 };
+const pikachu = { id: 13, imagen: "x.png", nombre: "Pikachu", precio_nuevo: 4999, stock: 2, cantidad: 1 };
 
 function dibujar() {
   return render(
@@ -21,6 +21,7 @@ function dibujar() {
   );
 }
 
+// Mock: el localStorage de jsdom se precarga con productos (setItem) para simular un carrito guardado
 QUnit.module("TestTablaCarrito", function (hooks) {
     hooks.afterEach(function () {
         cleanup();
@@ -34,53 +35,53 @@ QUnit.module("TestTablaCarrito", function (hooks) {
     });
 
     QUnit.test("Con productos guardados muestra las filas y el total", function (assert) {
-        localStorage.setItem("cart", JSON.stringify([zelda, fifa]));
+        localStorage.setItem("cart", JSON.stringify([charmander, pikachu]));
         dibujar();
-        const nombreZelda = screen.queryByText("The Legend of Zelda");
-        const nombreFifa = screen.queryByText("FIFA 21");
+        const nombreCharmander = screen.queryByText("Charmander");
+        const nombrePikachu = screen.queryByText("Pikachu");
         const totalEsperado = "$ 16.997"; // 5999 * 2 + 4999
-        assert.ok(nombreZelda);
-        assert.ok(nombreFifa);
+        assert.ok(nombreCharmander);
+        assert.ok(nombrePikachu);
         assert.ok(screen.queryByText(totalEsperado));
         assert.notOk(screen.queryByText(/Tu carrito está vacío\./));
     });
 
     QUnit.test("Al hacer clic en Eliminar se abre el modal de confirmación", function (assert) {
-        localStorage.setItem("cart", JSON.stringify([zelda]));
+        localStorage.setItem("cart", JSON.stringify([charmander]));
         dibujar();
         assert.notOk(screen.queryByText("Confirmar Eliminación"));
-        const fila = screen.getByText("The Legend of Zelda").closest("tr");
+        const fila = screen.getByText("Charmander").closest("tr");
         fireEvent.click(within(fila).getByRole("button", { name: "Eliminar" }));
         assert.ok(screen.queryByText("Confirmar Eliminación"));
     });
 
     QUnit.test("Al confirmar la eliminación se quita la fila", function (assert) {
-        localStorage.setItem("cart", JSON.stringify([zelda, fifa]));
+        localStorage.setItem("cart", JSON.stringify([charmander, pikachu]));
         dibujar();
-        const fila = screen.getByText("The Legend of Zelda").closest("tr");
+        const fila = screen.getByText("Charmander").closest("tr");
         fireEvent.click(within(fila).getByRole("button", { name: "Eliminar" }));
         const modal = screen.getByRole("dialog");
         fireEvent.click(within(modal).getByRole("button", { name: "Eliminar" }));
-        assert.notOk(screen.queryByText("The Legend of Zelda"));
-        assert.ok(screen.queryByText("FIFA 21"));
+        assert.notOk(screen.queryByText("Charmander"));
+        assert.ok(screen.queryByText("Pikachu"));
         assert.notOk(screen.queryByText("Confirmar Eliminación"));
     });
 
     QUnit.test("Al cancelar la eliminación el producto sigue en la tabla", function (assert) {
-        localStorage.setItem("cart", JSON.stringify([zelda]));
+        localStorage.setItem("cart", JSON.stringify([charmander]));
         dibujar();
-        const fila = screen.getByText("The Legend of Zelda").closest("tr");
+        const fila = screen.getByText("Charmander").closest("tr");
         fireEvent.click(within(fila).getByRole("button", { name: "Eliminar" }));
         const modal = screen.getByRole("dialog");
         fireEvent.click(within(modal).getByRole("button", { name: "Cancelar" }));
-        assert.ok(screen.queryByText("The Legend of Zelda"));
+        assert.ok(screen.queryByText("Charmander"));
         assert.notOk(screen.queryByText("Confirmar Eliminación"));
     });
 
     QUnit.test("Al eliminar el último producto aparece el mensaje de vacío", function (assert) {
-        localStorage.setItem("cart", JSON.stringify([fifa]));
+        localStorage.setItem("cart", JSON.stringify([pikachu]));
         dibujar();
-        const fila = screen.getByText("FIFA 21").closest("tr");
+        const fila = screen.getByText("Pikachu").closest("tr");
         fireEvent.click(within(fila).getByRole("button", { name: "Eliminar" }));
         const modal = screen.getByRole("dialog");
         fireEvent.click(within(modal).getByRole("button", { name: "Eliminar" }));
