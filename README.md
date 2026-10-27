@@ -106,7 +106,9 @@ mi-tienda/
 ├── jsconfig.json            # Alias "@/..." que apunta a "src/..."
 ├── eslint.config.mjs        # Configuración de ESLint
 ├── docs/
-│   └── cobertura-testing.md # Documento de cobertura de testing
+│   ├── cobertura-testing.md # Documento de cobertura de testing
+│   ├── ers-tcg-duoc.md      # Documento ERS (versión 2)
+│   └── *.docx               # Versiones en Word de ambos documentos
 ├── tsconfig.qunit.json      # Configuración que usan las pruebas (JSX y alias "@/")
 ├── public/
 │   └── assets/img/          # Logo propio en SVG (logo-tcg-duoc.svg)
@@ -434,7 +436,8 @@ main
       ├── tarea/personalizacion
       ├── tarea/filtro-categorias
       ├── tarea/revision-final
-      └── tarea/proceso-testeo
+      ├── tarea/proceso-testeo
+      └── tarea/ers
 ```
 
 ### Pull Requests y revisión
@@ -461,6 +464,7 @@ Cada tarea se integra con un Pull Request hacia `Desarrollo` que **revisa y apru
 | #16 | `Desarrollo` → `main` | Entrega final |
 | #17 | `tarea/revision-final` | Revisión final: precios sin descuento, datos de prueba con cartas Pokémon, comentarios y README |
 | #18 | `tarea/proceso-testeo` | Cobertura de código (c8), pruebas con mock de fetch y documento de cobertura de testing |
+| #19 | `tarea/ers` | Documento ERS versión 2 (TCG Duoc) en docs/, en Markdown y Word |
 
 Los mensajes de commit son cortos y describen lo que se hizo (por ejemplo, "Agrego el navbar y el footer como componentes").
 
