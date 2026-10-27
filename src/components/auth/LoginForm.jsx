@@ -33,7 +33,7 @@ export default function LoginForm() {
     setIntentoEnvio(true);
     if (Object.keys(errores).length > 0) return; // no deja enviar datos inválidos
 
-    // Aquí irá la llamada real a la API en una tarea posterior
+    // Simulado: no hay sesión ni API de usuarios (igual que en la plantilla)
     setExito(true);
     setValores(INICIAL);
     setTocados({});

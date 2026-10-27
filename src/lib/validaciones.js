@@ -1,4 +1,4 @@
-// Reglas de validación compartidas por Iniciar sesión y Crear cuenta.
+// Reglas de validación de los formularios (iniciar sesión, crear cuenta, contacto y compra).
 // Cada función devuelve un objeto de errores: { campo: "mensaje" }.
 // Si el objeto está vacío, el formulario es válido.
 

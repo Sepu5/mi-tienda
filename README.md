@@ -85,14 +85,14 @@ npm test
 Al terminar se ve el detalle de cada prueba (`ok 1 ...`, `ok 2 ...`) y un resumen como este:
 
 ```
-1..88
-# pass 88
+1..90
+# pass 90
 # skip 0
 # todo 0
 # fail 0
 ```
 
-Si todo está bien aparece `# pass 88` y `# fail 0`. El comando usa `cross-env` para definir las variables de entorno, así que **funciona igual en Windows (PowerShell), Linux y Mac**.
+Si todo está bien aparece `# pass 90` y `# fail 0`. El comando usa `cross-env` para definir las variables de entorno, así que **funciona igual en Windows (PowerShell), Linux y Mac**.
 
 ## Estructura de carpetas
 
@@ -109,7 +109,7 @@ mi-tienda/
 ├── src/
 │   ├── app/                 # Rutas (una carpeta por página, con su page.js)
 │   │   ├── layout.js        # Molde de todas las páginas (Navbar, Footer, CartProvider)
-│   │   ├── globals.css      # Estilos propios (los de la plantilla)
+│   │   ├── globals.css      # Estilos propios (de la plantilla + tema Pokémon)
 │   │   ├── page.js          # Home (/)
 │   │   ├── blog/            # /blog
 │   │   ├── carrito/         # /carrito
@@ -248,7 +248,7 @@ Hay 24 componentes en `src/components/`, agrupados por tema. En las tablas, el *
 
 | Componente | Tipo | Props | Responsabilidad |
 | --- | --- | --- | --- |
-| `ProductCard` | Compartido | `producto` | Tarjeta de un producto: imagen, nombre, categoría, precio anterior y actual (o `FREE`), stock, link "Ver" y `BotonAgregar`. |
+| `ProductCard` | Compartido | `producto` | Tarjeta de un producto: imagen, nombre, categoría, precio actual (o `FREE`) y el precio anterior tachado solo si hay descuento, stock, link "Ver" y `BotonAgregar`. |
 | `ProductGrid` | Compartido | `productos` | Grilla que dibuja una `ProductCard` por cada producto de la lista. |
 | `ProductosHome` | Cliente | ninguna | Pide los productos a la fake-api con `fetch` + `useEffect`, muestra un spinner mientras carga y un aviso si falla. En pantalla deja los primeros 6 como "Productos" y los siguientes 6 como "Los más vistos". |
 
@@ -342,13 +342,13 @@ Hay dos tipos de pruebas:
 | `test/test_compra.js` | `crearOrden`: total, items, cliente, fecha ISO, número de orden y carrito vacío | 6 |
 | `test/test_formato.js` | `formatearPrecio`: formato chileno con punto de miles, el 0 y precios menores a mil | 4 |
 | `test/test_validaciones.js` | `validarLogin`, `validarRegistro`, `validarContacto` y `validarCompra`: casos válidos, vacíos, largos mínimos y máximos | 22 |
-| `test/test_productcard.jsx` | `ProductCard`: nombre, categoría, precio con formato, `FREE`, link "Ver" y que "Añadir" guarde el producto en `localStorage` | 5 |
+| `test/test_productcard.jsx` | `ProductCard`: nombre, categoría, precio con formato, `FREE`, precio tachado solo con descuento, link "Ver" y que "Añadir" guarde el producto en `localStorage` | 7 |
 | `test/test_filacarrito.jsx` | `FilaCarrito`: botones `+` / `-` habilitados o deshabilitados, producto gratis, subtotal y callbacks `onCambiar` / `onEliminar` | 8 |
 | `test/test_tablacarrito.jsx` | `TablaCarrito`: carrito vacío, filas y total, y el flujo del modal (abrir, confirmar, cancelar, eliminar el último producto) | 6 |
 | `test/test_loginform.jsx` | `LoginForm`: errores al enviar vacío, correo sin formato y mensaje de éxito | 3 |
 | `test/test_registroform.jsx` | `RegistroForm`: comuna deshabilitada sin región, contraseñas distintas, errores al enviar vacío y éxito | 5 |
 | `test/test_contactoform.jsx` | `ContactoForm`: errores al enviar vacío, mensaje muy corto y agradecimiento con el nombre | 3 |
-| **Total** | | **88** |
+| **Total** | | **90** |
 
 De forma indirecta también se prueban `CartProvider`, `useCarrito`, `BotonAgregar`, `ModalEliminar` y `Campo`, porque forman parte de los componentes anteriores.
 
@@ -375,14 +375,14 @@ De forma indirecta también se prueban `CartProvider`, `useCarrito`, `BotonAgreg
 ### Resultado obtenido
 
 ```
-1..88
-# pass 88
+1..90
+# pass 90
 # skip 0
 # todo 0
 # fail 0
 ```
 
-Las **88 pruebas pasan** sin fallas. Además, `npm run build` compila sin errores y `npm run lint` termina con 0 errores (7 advertencias por usar `<img>`).
+Las **90 pruebas pasan** sin fallas. Además, `npm run build` compila sin errores y `npm run lint` termina con 0 errores (7 advertencias por usar `<img>`).
 
 ## Flujo de trabajo con Git y Trello
 
@@ -407,7 +407,10 @@ main
       ├── tarea/relleno-blog
       ├── tarea/menu-movil
       ├── tarea/arreglo-dependencias
-      └── tarea/documentacion
+      ├── tarea/documentacion
+      ├── tarea/personalizacion
+      ├── tarea/filtro-categorias
+      └── tarea/revision-final
 ```
 
 ### Pull Requests y revisión
@@ -430,7 +433,9 @@ Cada tarea se integra con un Pull Request hacia `Desarrollo` que **revisa y apru
 | #12 | `tarea/arreglo-dependencias` | Arreglo de la versión de `jsdom` para que `npm install` funcione en una instalación limpia |
 | #13 | `tarea/documentacion` | Este README |
 | #14 | `tarea/personalizacion` | Temática Pokémon: nombre TCG Duoc, cartas, categorías por tipo, colores, logo y mapa de Duoc Maipú |
-| #15 | tarea/filtro-categorias | Página por cada tipo de carta (/categorias/[slug]) y links de categorías que filtran |
+| #15 | `tarea/filtro-categorias` | Página por cada tipo de carta (`/categorias/[slug]`) y links de categorías que filtran |
+| #16 | `Desarrollo` → `main` | Entrega final |
+| #17 | `tarea/revision-final` | Revisión final: precios sin descuento, datos de prueba con cartas Pokémon, comentarios y README |
 
 Los mensajes de commit son cortos y describen lo que se hizo (por ejemplo, "Agrego el navbar y el footer como componentes").
 
@@ -453,7 +458,7 @@ Nos organizamos con un tablero de Trello: [mi-tienda-Fullstack2](https://trello.
 | Sin avisos visuales propios al agregar productos | `AvisoCarrito`: alerta flotante que avisa cuando se añade un producto o se llega al límite de stock |
 | Compra: páginas HTML estáticas de éxito y error | Páginas `/comprar-ok` y `/comprar-error` que leen la orden guardada (`ultimaCompra`) y muestran los datos reales; con opción para simular el rechazo del pago |
 | Menú sin saber en qué página estás y sin acceso al carrito en celular | Menú lateral (offcanvas) para celular con todos los links y el carrito, que se cierra solo al navegar; botón del carrito visible en la barra del celular; link activo en el navbar con `NavLink` |
-| Sin pruebas | 88 pruebas automatizadas con QUnit |
+| Sin pruebas | 90 pruebas automatizadas con QUnit |
 
 ## Limitaciones conocidas
 

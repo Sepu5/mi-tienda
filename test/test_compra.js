@@ -9,8 +9,8 @@ import { crearOrden } from "../src/lib/compra.js";
 const fechaFija = new Date("2026-10-27T12:00:00Z");
 const cliente = { nombre: "Franco", apellidos: "Sepúlveda", correo: "franco@correo.cl" };
 const carrito = [
-  { id: 1, nombre: "The Legend of Zelda", precio_nuevo: 5999, stock: 19, cantidad: 2 },
-  { id: 4, nombre: "Fortnite", precio_nuevo: 0, stock: 10, cantidad: 1 },
+  { id: 1, nombre: "Charmander", precio_nuevo: 5999, stock: 19, cantidad: 2 },
+  { id: 4, nombre: "Energía Fuego", precio_nuevo: 0, stock: 10, cantidad: 1 },
 ];
 
 QUnit.module("TestCrearOrden", function () {
