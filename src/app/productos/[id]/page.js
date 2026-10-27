@@ -4,6 +4,16 @@ import { productos } from "@/data/productos";
 import BotonAgregar from "@/components/carrito/BotonAgregar";
 import { formatearPrecio } from "@/lib/formato";
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const producto = productos.find((p) => p.id === Number(id));
+  return {
+    title: producto
+      ? `${producto.nombre} | TCG Duoc`
+      : "Producto no encontrado | TCG Duoc",
+  };
+}
+
 export default async function ProductoDetalle({ params }) {
   const { id } = await params;
   const producto = productos.find((p) => p.id === Number(id));
@@ -11,6 +21,7 @@ export default async function ProductoDetalle({ params }) {
   if (!producto) notFound();
 
   const esGratis = producto.precio_nuevo === 0;
+  const enOferta = producto.precio_descuento > producto.precio_nuevo;
 
   return (
     <div className="container py-5">
@@ -33,9 +44,13 @@ export default async function ProductoDetalle({ params }) {
           <p>{producto.descripcion}</p>
 
           <p>
-            <del className="text-muted">
-              {formatearPrecio(producto.precio_descuento)}
-            </del>{" "}
+            {enOferta && (
+              <>
+                <del className="text-muted">
+                  {formatearPrecio(producto.precio_descuento)}
+                </del>{" "}
+              </>
+            )}
             <strong className="fs-4">
               {esGratis ? "FREE" : formatearPrecio(producto.precio_nuevo)}
             </strong>

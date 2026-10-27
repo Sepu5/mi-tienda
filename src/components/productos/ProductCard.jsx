@@ -5,6 +5,7 @@ import { formatearPrecio } from "@/lib/formato";
 // Tarjeta de un producto. Recibe el producto por props, igual que ProductRow en hola-mundo.
 export default function ProductCard({ producto }) {
   const esGratis = producto.precio_nuevo === 0;
+  const enOferta = producto.precio_descuento > producto.precio_nuevo;
 
   return (
     <div className="col">
@@ -16,9 +17,13 @@ export default function ProductCard({ producto }) {
           </Link>
           <small className="text-muted">{producto.categoria}</small>
           <div className="d-flex flex-column my-3">
-            <span className="precio-descuento text-decoration-line-through">
-              {formatearPrecio(producto.precio_descuento)}
-            </span>
+            {enOferta ? (
+              <span className="precio-descuento text-decoration-line-through">
+                {formatearPrecio(producto.precio_descuento)}
+              </span>
+            ) : (
+              <span className="precio-descuento">&nbsp;</span>
+            )}
             <span className="precio-nuevo fw-bolder">
               {esGratis ? "FREE" : formatearPrecio(producto.precio_nuevo)}
             </span>
