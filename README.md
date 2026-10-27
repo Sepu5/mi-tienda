@@ -85,14 +85,14 @@ npm test
 Al terminar se ve el detalle de cada prueba (`ok 1 ...`, `ok 2 ...`) y un resumen como este:
 
 ```
-1..82
-# pass 82
+1..88
+# pass 88
 # skip 0
 # todo 0
 # fail 0
 ```
 
-Si todo está bien aparece `# pass 82` y `# fail 0`. El comando usa `cross-env` para definir las variables de entorno, así que **funciona igual en Windows (PowerShell), Linux y Mac**.
+Si todo está bien aparece `# pass 88` y `# fail 0`. El comando usa `cross-env` para definir las variables de entorno, así que **funciona igual en Windows (PowerShell), Linux y Mac**.
 
 ## Estructura de carpetas
 
@@ -114,6 +114,7 @@ mi-tienda/
 │   │   ├── blog/            # /blog
 │   │   ├── carrito/         # /carrito
 │   │   ├── categorias/      # /categorias
+│   │   │   └── [slug]/      # /categorias/fuego, /categorias/agua, ... (ruta dinámica)
 │   │   ├── comprar/         # /comprar
 │   │   ├── comprar-ok/      # /comprar-ok
 │   │   ├── comprar-error/   # /comprar-error
@@ -137,6 +138,7 @@ mi-tienda/
 │   ├── lib/                 # Lógica pura, sin React (fácil de probar)
 │   │   ├── api.js           # URL de la fake-api
 │   │   ├── carrito.js       # Agregar, cambiar cantidad, eliminar, total
+│   │   ├── catalogo.js      # Buscar una categoría por slug y filtrar productos por tipo
 │   │   ├── compra.js        # Crear la orden de compra
 │   │   ├── formato.js       # Formato de precios chilenos
 │   │   └── validaciones.js  # Reglas de validación de los formularios
@@ -147,6 +149,7 @@ mi-tienda/
 └── test/                    # Pruebas QUnit
     ├── setup.js             # Prepara jsdom para las pruebas de componentes
     ├── test_carrito.js
+    ├── test_catalogo.js
     ├── test_compra.js
     ├── test_formato.js
     ├── test_validaciones.js
@@ -165,6 +168,7 @@ mi-tienda/
 | `/` | Home: carrusel, categorías y productos (cargados desde la fake-api) |
 | `/ofertas` | Productos con descuento (precio anterior mayor que el precio actual) |
 | `/categorias` | Tarjetas de categorías y los productos de cada una |
+| `/categorias/[slug]` | Solo las cartas de un tipo (ruta dinámica). Si el slug no existe muestra la página 404 |
 | `/productos/[id]` | Detalle de un producto (ruta dinámica). Si el id no existe muestra la página 404 |
 | `/nosotros` | Información de la tienda (página simple por ahora) |
 | `/blog` | Entradas del blog |
@@ -228,7 +232,7 @@ Hay 24 componentes en `src/components/`, agrupados por tema. En las tablas, el *
 | Componente | Tipo | Props | Responsabilidad |
 | --- | --- | --- | --- |
 | `Carrusel` | Servidor | ninguna | Carrusel de Bootstrap con 3 slides (los datos están dentro del componente). El JavaScript que lo hace girar lo carga `BootstrapClient`. |
-| `CategoriaCard` | Compartido | `categoria` | Tarjeta de una categoría con link a `/categorias`. Se usa en la Home y en Categorías. |
+| `CategoriaCard` | Compartido | `categoria` | Tarjeta de una categoría con link a `/categorias/<slug>`. Se usa en la Home y en Categorías. |
 
 ### `layout/`
 
@@ -296,7 +300,7 @@ Al pagar en `/comprar`, `crearOrden` (en `src/lib/compra.js`) arma la orden con 
 - **`next/link`:** todos los links internos usan `Link` de Next.js, así la navegación no recarga la página completa.
 - **`NavLink`:** marca en el navbar la página en la que estás (clase `active` y `aria-current="page"`) usando `usePathname`. El Home solo está activo en `/`; los demás lo están en su ruta y las que cuelgan de ella.
 - **Menú lateral en celular:** en pantallas chicas el navbar inferior se oculta y aparecen un botón del carrito (con el total) y un botón que abre un menú lateral (offcanvas de Bootstrap) con todos los links de la tienda. `MobileMenu` detecta con `usePathname` que cambió la ruta y lo **cierra automáticamente** al navegar.
-- **Rutas dinámicas:** `/productos/[id]` busca el producto por su id. Cada `ProductCard` lleva a `/productos/<id>` y si el id no existe se muestra la página 404 (`notFound()`).
+- **Rutas dinámicas:** `/productos/[id]` busca el producto por su id. `/categorias/[slug]` hace lo mismo con los tipos de cartas: busca la categoría por su `slug` (`fuego`, `agua`, ...), muestra solo sus cartas y, con `generateStaticParams`, se genera una página por tipo al hacer el build; si el slug no existe también se muestra la 404. Los links de la Home, del navbar y del menú del celular llevan a la página de cada tipo. Cada `ProductCard` lleva a `/productos/<id>` y si el id no existe se muestra la página 404 (`notFound()`).
 - **Navegación por código:** `FormularioCompra` usa `useRouter().push(...)` para ir a la pantalla de éxito o de error después de pagar.
 
 ## Formularios y validaciones
@@ -334,6 +338,7 @@ Hay dos tipos de pruebas:
 | Archivo | Qué prueba | Pruebas |
 | --- | --- | --- |
 | `test/test_carrito.js` | `agregarAlCarrito`, `cambiarCantidad`, `eliminarDelCarrito`, `calcularTotal` y `contarProductos`: stock, producto gratis, eliminar al llegar a 0 y que no se modifique el carrito original | 20 |
+| `test/test_catalogo.js` | `buscarCategoria` y `productosDeCategoria`: slug existente e inexistente, filtrar por tipo, tipo sin cartas, que no se modifique el arreglo original y que ninguna categoría real quede vacía | 6 |
 | `test/test_compra.js` | `crearOrden`: total, items, cliente, fecha ISO, número de orden y carrito vacío | 6 |
 | `test/test_formato.js` | `formatearPrecio`: formato chileno con punto de miles, el 0 y precios menores a mil | 4 |
 | `test/test_validaciones.js` | `validarLogin`, `validarRegistro`, `validarContacto` y `validarCompra`: casos válidos, vacíos, largos mínimos y máximos | 22 |
@@ -343,7 +348,7 @@ Hay dos tipos de pruebas:
 | `test/test_loginform.jsx` | `LoginForm`: errores al enviar vacío, correo sin formato y mensaje de éxito | 3 |
 | `test/test_registroform.jsx` | `RegistroForm`: comuna deshabilitada sin región, contraseñas distintas, errores al enviar vacío y éxito | 5 |
 | `test/test_contactoform.jsx` | `ContactoForm`: errores al enviar vacío, mensaje muy corto y agradecimiento con el nombre | 3 |
-| **Total** | | **82** |
+| **Total** | | **88** |
 
 De forma indirecta también se prueban `CartProvider`, `useCarrito`, `BotonAgregar`, `ModalEliminar` y `Campo`, porque forman parte de los componentes anteriores.
 
@@ -370,14 +375,14 @@ De forma indirecta también se prueban `CartProvider`, `useCarrito`, `BotonAgreg
 ### Resultado obtenido
 
 ```
-1..82
-# pass 82
+1..88
+# pass 88
 # skip 0
 # todo 0
 # fail 0
 ```
 
-Las **82 pruebas pasan** sin fallas. Además, `npm run build` compila sin errores y `npm run lint` termina con 0 errores (7 advertencias por usar `<img>`).
+Las **88 pruebas pasan** sin fallas. Además, `npm run build` compila sin errores y `npm run lint` termina con 0 errores (7 advertencias por usar `<img>`).
 
 ## Flujo de trabajo con Git y Trello
 
@@ -425,6 +430,7 @@ Cada tarea se integra con un Pull Request hacia `Desarrollo` que **revisa y apru
 | #12 | `tarea/arreglo-dependencias` | Arreglo de la versión de `jsdom` para que `npm install` funcione en una instalación limpia |
 | #13 | `tarea/documentacion` | Este README |
 | #14 | `tarea/personalizacion` | Temática Pokémon: nombre TCG Duoc, cartas, categorías por tipo, colores, logo y mapa de Duoc Maipú |
+| #15 | tarea/filtro-categorias | Página por cada tipo de carta (/categorias/[slug]) y links de categorías que filtran |
 
 Los mensajes de commit son cortos y describen lo que se hizo (por ejemplo, "Agrego el navbar y el footer como componentes").
 
@@ -447,13 +453,13 @@ Nos organizamos con un tablero de Trello: [mi-tienda-Fullstack2](https://trello.
 | Sin avisos visuales propios al agregar productos | `AvisoCarrito`: alerta flotante que avisa cuando se añade un producto o se llega al límite de stock |
 | Compra: páginas HTML estáticas de éxito y error | Páginas `/comprar-ok` y `/comprar-error` que leen la orden guardada (`ultimaCompra`) y muestran los datos reales; con opción para simular el rechazo del pago |
 | Menú sin saber en qué página estás y sin acceso al carrito en celular | Menú lateral (offcanvas) para celular con todos los links y el carrito, que se cierra solo al navegar; botón del carrito visible en la barra del celular; link activo en el navbar con `NavLink` |
-| Sin pruebas | 82 pruebas automatizadas con QUnit |
+| Sin pruebas | 88 pruebas automatizadas con QUnit |
 
 ## Limitaciones conocidas
 
 - El inicio de sesión y el registro son simulados (validan los datos, pero no hay sesión de usuario ni perfil), igual que en la plantilla original, donde los usuarios estaban escritos en el código y el perfil era solo diseño.
 - Solo la Home usa la fake-api; el detalle de producto, Ofertas, Categorías y el carrito usan `src/data/productos.js`.
-- El buscador del navbar todavía no filtra productos y los links de las categorías llevan a `/categorias` completo.
+- El buscador del navbar todavía no filtra productos.
 
 ## Créditos de imágenes
 
