@@ -1,0 +1,88 @@
+.avatar {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.link-none {
+    text-decoration: none;
+    color: black;
+}
+
+.link-none:hover {
+    text-decoration: none;
+    color: blue;
+}
+
+.precio-descuento {
+    font-size: 0.9rem;
+    color: #6c757d; /* Color gris para el precio anterior */
+}
+.precio-nuevo {
+    color: var(--poke-rojo); /* Color destacado para el precio nuevo */
+    font-size: 1.4rem; /* Tamaño de fuente más grande para el precio nuevo */
+}
+
+.card-producto {
+    transition: box-shadow 0.3s ease; /* Suaviza la transición de la sombra */
+}
+.card-producto:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+    cursor: pointer;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "|";
+    color: #6c757d;
+    padding: 0 8px;
+}
+.breadcrumb-item + .breadcrumb-item:last-child::before {
+    content: ">";
+    color: #6c757d;
+    padding: 0 8px;
+}
+
+/* ---- Tema Pokémon ---- */
+:root {
+    --poke-rojo: #E3350D;
+    --poke-amarillo: #FFCB05;
+    --poke-azul: #2A75BB;
+    --poke-azul-oscuro: #1D2C5E;
+}
+
+.navbar-poke {
+    background: var(--poke-azul-oscuro);
+}
+.navbar-poke .nav-link {
+    color: #fff;
+}
+.navbar-poke .nav-link.active,
+.navbar-poke .nav-link:hover {
+    color: var(--poke-amarillo);
+}
+.marca {
+    color: var(--poke-amarillo);
+}
+
+.btn-poke {
+    background: var(--poke-amarillo);
+    border-color: var(--poke-amarillo);
+    color: #1D2C5E;
+}
+.btn-poke:hover {
+    background: #e6b800;
+    border-color: #e6b800;
+    color: #1D2C5E;
+}
+
+.card-producto .card-img-top {
+    height: 260px;
+    object-fit: contain;
+    background: #f4f6fb;
+    padding: 10px;
+}
+
+.footer-poke {
+    background: var(--poke-azul-oscuro);
+}
