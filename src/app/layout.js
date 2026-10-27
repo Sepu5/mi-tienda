@@ -3,7 +3,9 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./globals.css";
 import BootstrapClient from "@/components/BootstrapClient";
 import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar"; 
+import Navbar from "@/components/layout/Navbar";
+import AvisoCarrito from "@/components/carrito/AvisoCarrito";
+import { CartProvider } from "@/context/CartContext";
 
 export const metadata = {
   title: "Tienda de Videojuegos",
@@ -16,9 +18,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        {/* CartProvider comparte el carrito con todos los componentes */}
+        <CartProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+          <AvisoCarrito />
+        </CartProvider>
         <BootstrapClient />
       </body>
     </html>
