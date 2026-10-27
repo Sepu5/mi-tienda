@@ -6,6 +6,7 @@
 // Se usa una fecha fija para que el resultado siempre sea el mismo.
 import { crearOrden } from "../src/lib/compra.js";
 
+// Mock: fecha fija en vez de la hora real del reloj
 const fechaFija = new Date("2026-10-27T12:00:00Z");
 const cliente = { nombre: "Franco", apellidos: "Sepúlveda", correo: "franco@correo.cl" };
 const carrito = [

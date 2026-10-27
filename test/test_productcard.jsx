@@ -37,6 +37,7 @@ function dibujar(producto) {
   );
 }
 
+// Mock: el localStorage de jsdom se usa como carrito simulado y se limpia después de cada prueba
 QUnit.module("TestProductCard", function (hooks) {
     hooks.afterEach(function () {
         cleanup();

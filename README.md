@@ -26,6 +26,7 @@ Tienda de cartas Pokémon TCG hecha para el caso semestral de **DSY1104**. Migra
 | [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) (`@testing-library/react` y `@testing-library/dom`) | 16.3.3 / 10.4.2 | Dibujar componentes y simular clics en las pruebas |
 | tsx | 4.23.15 | Permite que Node entienda el JSX de los tests y componentes |
 | cross-env | 10.1.0 | Que `npm test` funcione igual en Windows, Linux y Mac |
+| [c8](https://github.com/bcoe/c8) | 12.0.0 | Mide la cobertura de código de las pruebas |
 | ESLint + eslint-config-next | ^9 / 16.4.3 | Revisión del código |
 
 ## Requisitos
@@ -75,6 +76,7 @@ Abrir http://localhost:3000 en el navegador.
 | `npm run lint` | Revisa el código con ESLint (hoy: 0 errores y 7 advertencias por usar `<img>` en vez de `next/image`) |
 | `npm run api` | Fake-api en http://localhost:4000 |
 | `npm test` | Corre las pruebas con QUnit |
+| `npm run coverage` | Corre las pruebas midiendo la cobertura de código con c8 (reporte en la terminal y en `coverage/index.html`) |
 
 ## Cómo ejecutar las pruebas
 
@@ -85,14 +87,14 @@ npm test
 Al terminar se ve el detalle de cada prueba (`ok 1 ...`, `ok 2 ...`) y un resumen como este:
 
 ```
-1..90
-# pass 90
+1..95
+# pass 95
 # skip 0
 # todo 0
 # fail 0
 ```
 
-Si todo está bien aparece `# pass 90` y `# fail 0`. El comando usa `cross-env` para definir las variables de entorno, así que **funciona igual en Windows (PowerShell), Linux y Mac**.
+Si todo está bien aparece `# pass 95` y `# fail 0`. El comando usa `cross-env` para definir las variables de entorno, así que **funciona igual en Windows (PowerShell), Linux y Mac**.
 
 ## Estructura de carpetas
 
@@ -103,6 +105,8 @@ mi-tienda/
 ├── next.config.mjs          # Configuración de Next.js
 ├── jsconfig.json            # Alias "@/..." que apunta a "src/..."
 ├── eslint.config.mjs        # Configuración de ESLint
+├── docs/
+│   └── cobertura-testing.md # Documento de cobertura de testing
 ├── tsconfig.qunit.json      # Configuración que usan las pruebas (JSX y alias "@/")
 ├── public/
 │   └── assets/img/          # Logo propio en SVG (logo-tcg-duoc.svg)
@@ -157,6 +161,7 @@ mi-tienda/
     ├── test_filacarrito.jsx
     ├── test_loginform.jsx
     ├── test_productcard.jsx
+    ├── test_productoshome.jsx
     ├── test_registroform.jsx
     └── test_tablacarrito.jsx
 ```
@@ -346,9 +351,12 @@ Hay dos tipos de pruebas:
 | `test/test_filacarrito.jsx` | `FilaCarrito`: botones `+` / `-` habilitados o deshabilitados, producto gratis, subtotal y callbacks `onCambiar` / `onEliminar` | 8 |
 | `test/test_tablacarrito.jsx` | `TablaCarrito`: carrito vacío, filas y total, y el flujo del modal (abrir, confirmar, cancelar, eliminar el último producto) | 6 |
 | `test/test_loginform.jsx` | `LoginForm`: errores al enviar vacío, correo sin formato y mensaje de éxito | 3 |
+| `test/test_productoshome.jsx` | `ProductosHome` con un `fetch` falso (mock): mensaje de carga, cartas mostradas, aviso si la API responde con error o falla y URL pedida | 5 |
 | `test/test_registroform.jsx` | `RegistroForm`: comuna deshabilitada sin región, contraseñas distintas, errores al enviar vacío y éxito | 5 |
 | `test/test_contactoform.jsx` | `ContactoForm`: errores al enviar vacío, mensaje muy corto y agradecimiento con el nombre | 3 |
-| **Total** | | **90** |
+| **Total** | | **95** |
+
+`ProductosHome` se prueba reemplazando `fetch` por una función falsa (mock), así no depende de que `npm run api` esté corriendo.
 
 De forma indirecta también se prueban `CartProvider`, `useCarrito`, `BotonAgregar`, `ModalEliminar` y `Campo`, porque forman parte de los componentes anteriores.
 
@@ -363,26 +371,41 @@ De forma indirecta también se prueban `CartProvider`, `useCarrito`, `BotonAgreg
   ```
 - Los componentes y tests que tienen JSX usan la extensión **`.jsx`**, porque `tsx` no transforma JSX dentro de archivos `.js`.
 
+## Proceso de testeo
+
+El detalle completo está en [`docs/cobertura-testing.md`](docs/cobertura-testing.md). Resumen de los cinco conceptos:
+
+1. **Configuración del entorno:** las pruebas corren en Node con QUnit, un navegador falso (jsdom), React Testing Library y `tsx`. Todo está preparado en `test/setup.js`, `tsconfig.qunit.json` y los scripts de `package.json`.
+2. **Escritura de pruebas:** cada caso es un `QUnit.test` con el patrón Arrange → Act → Assert (preparar, ejecutar, comprobar).
+3. **Uso de mocks:** reemplazamos partes reales por versiones falsas hechas a mano: un `fetch` falso para no depender de la fake-api (`test_productoshome.jsx`), funciones espía para ver con qué se llamó un callback, un `localStorage` de prueba y una fecha fija.
+4. **Análisis de resultados:** se mira el resumen de `npm test` (pasan / fallan) y, si algo falla, qué regla no se cumplió. Los resultados y su análisis están en el documento de cobertura.
+5. **Cobertura de código:** mide qué parte del código de `src/` ejecutan las pruebas. Se corre con:
+
+```bash
+npm run coverage
+```
+
+Muestra una tabla por archivo en la terminal y crea un reporte en `coverage/index.html` (la carpeta no se sube a Git). Resultado actual: 49,31 % de statements y líneas, 80,62 % de ramas y 83,63 % de funciones; la lógica de `src/lib` está al 100 %, y lo que queda sin cubrir son sobre todo páginas y componentes de presentación.
+
 ### Qué no se prueba directamente
 
 | Componente | Por qué |
 | --- | --- |
 | `NavLink`, `MobileMenu`, `FormularioCompra` | Dependen del router de Next.js (`usePathname`, `useRouter`), que solo existe dentro de la aplicación corriendo y no en un entorno de pruebas simple. Su lógica sí está cubierta por pruebas de las funciones puras: reglas de validación y creación de la orden. |
-| `ProductosHome` | Hace `fetch` a la fake-api, así que depende de que `npm run api` esté corriendo. |
 | `Navbar`, `Footer`, `Carrusel`, `CategoriaCard`, `BotonCarrito`, `ProductGrid`, `BootstrapClient` | Son casi solo estructura HTML o dependen del JavaScript de Bootstrap, y la lógica que usan (formato de precios, total del carrito) ya tiene sus pruebas. |
 | `AvisoCarrito`, `DatosCliente`, `ResumenCompra`, `ResultadoCompra` | Son pantallas de presentación; la información que muestran sale de `crearOrden` y del carrito, que sí están probados. |
 
 ### Resultado obtenido
 
 ```
-1..90
-# pass 90
+1..95
+# pass 95
 # skip 0
 # todo 0
 # fail 0
 ```
 
-Las **90 pruebas pasan** sin fallas. Además, `npm run build` compila sin errores y `npm run lint` termina con 0 errores (7 advertencias por usar `<img>`).
+Las **95 pruebas pasan** sin fallas. Además, `npm run build` compila sin errores y `npm run lint` termina con 0 errores (7 advertencias por usar `<img>`).
 
 ## Flujo de trabajo con Git y Trello
 
@@ -410,7 +433,8 @@ main
       ├── tarea/documentacion
       ├── tarea/personalizacion
       ├── tarea/filtro-categorias
-      └── tarea/revision-final
+      ├── tarea/revision-final
+      └── tarea/proceso-testeo
 ```
 
 ### Pull Requests y revisión
@@ -436,6 +460,7 @@ Cada tarea se integra con un Pull Request hacia `Desarrollo` que **revisa y apru
 | #15 | `tarea/filtro-categorias` | Página por cada tipo de carta (`/categorias/[slug]`) y links de categorías que filtran |
 | #16 | `Desarrollo` → `main` | Entrega final |
 | #17 | `tarea/revision-final` | Revisión final: precios sin descuento, datos de prueba con cartas Pokémon, comentarios y README |
+| #18 | `tarea/proceso-testeo` | Cobertura de código (c8), pruebas con mock de fetch y documento de cobertura de testing |
 
 Los mensajes de commit son cortos y describen lo que se hizo (por ejemplo, "Agrego el navbar y el footer como componentes").
 
@@ -458,7 +483,7 @@ Nos organizamos con un tablero de Trello: [mi-tienda-Fullstack2](https://trello.
 | Sin avisos visuales propios al agregar productos | `AvisoCarrito`: alerta flotante que avisa cuando se añade un producto o se llega al límite de stock |
 | Compra: páginas HTML estáticas de éxito y error | Páginas `/comprar-ok` y `/comprar-error` que leen la orden guardada (`ultimaCompra`) y muestran los datos reales; con opción para simular el rechazo del pago |
 | Menú sin saber en qué página estás y sin acceso al carrito en celular | Menú lateral (offcanvas) para celular con todos los links y el carrito, que se cierra solo al navegar; botón del carrito visible en la barra del celular; link activo en el navbar con `NavLink` |
-| Sin pruebas | 90 pruebas automatizadas con QUnit |
+| Sin pruebas | 95 pruebas automatizadas con QUnit |
 
 ## Limitaciones conocidas
 

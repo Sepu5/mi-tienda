@@ -12,6 +12,7 @@ const charmander = { id: 1, imagen: "x.png", nombre: "Charmander", precio_nuevo:
 const energiaFuego = { id: 4, imagen: "x.png", nombre: "Energía Fuego", precio_nuevo: 0, stock: 10, cantidad: 1 };
 
 // Dibuja la fila dentro de una tabla (si no, React se queja del HTML)
+// Mock: funciones espía hechas a mano que registran las llamadas (por defecto no hacen nada)
 function dibujar(item, onCambiar = function () {}, onEliminar = function () {}) {
   return render(
     <table>
@@ -68,7 +69,7 @@ QUnit.module("TestFilaCarrito", function (hooks) {
     });
 
     QUnit.test("Al hacer clic en Eliminar se llama a onEliminar con el item", function (assert) {
-        // Función espía hecha a mano: guarda con qué la llamaron
+        // Mock: función espía que registra las llamadas
         const llamadas = [];
         function espiaEliminar(item) {
             llamadas.push(item);
@@ -82,6 +83,7 @@ QUnit.module("TestFilaCarrito", function (hooks) {
     });
 
     QUnit.test("Al hacer clic en + y - se llama a onCambiar con el id y el cambio", function (assert) {
+        // Mock: función espía que registra las llamadas
         const llamadas = [];
         function espiaCambiar(id, delta) {
             llamadas.push([id, delta]);
