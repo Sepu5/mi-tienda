@@ -60,9 +60,12 @@ export default function MobileMenu() {
                   <ul className="list-group">
                     {categorias.map((categoria) => (
                       <li key={categoria.id} className="list-group-item">
-                        <Link href="/categorias" className="link-none">{categoria.nombre}</Link>
+                        <Link href={`/categorias/${categoria.slug}`} className="link-none">{categoria.nombre}</Link>
                       </li>
                     ))}
+                    <li className="list-group-item">
+                      <Link href="/categorias" className="link-none">Ver todas</Link>
+                    </li>
                   </ul>
                 </div>
               </div>

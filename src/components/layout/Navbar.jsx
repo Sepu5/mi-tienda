@@ -53,9 +53,13 @@ export default function Navbar() {
                 <ul className="dropdown-menu">
                   {categorias.map((categoria) => (
                     <li key={categoria.id}>
-                      <Link className="dropdown-item" href="/categorias">{categoria.nombre}</Link>
+                      <Link className="dropdown-item" href={`/categorias/${categoria.slug}`}>{categoria.nombre}</Link>
                     </li>
                   ))}
+                  <li><hr className="dropdown-divider" /></li>
+                  <li>
+                    <Link className="dropdown-item" href="/categorias">Ver todas</Link>
+                  </li>
                 </ul>
               </li>
               <li className="nav-item"><NavLink href="/ofertas">Ofertas</NavLink></li>

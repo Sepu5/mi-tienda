@@ -14,7 +14,7 @@ export default function CategoriaCard({ categoria }) {
         <div className="card-body">
           <h5 className="card-title">{categoria.nombre}</h5>
           <p className="card-text">{categoria.descripcion}</p>
-          <Link href="/categorias" className="btn btn-primary">Explorar</Link>
+          <Link href={`/categorias/${categoria.slug}`} className="btn btn-primary">Explorar</Link>
         </div>
       </div>
     </div>
