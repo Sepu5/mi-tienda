@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "api": "json-server --watch db.json --port 4000",
-    "test": "cross-env TSX_TSCONFIG_PATH=tsconfig.qunit.json NODE_OPTIONS=--import=tsx qunit --require ./test/setup.js \"test/**/test_*.{js,jsx}\""
+    "test": "cross-env TSX_TSCONFIG_PATH=tsconfig.qunit.json NODE_OPTIONS=--import=tsx qunit --require ./test/setup.js \"test/**/test_*.{js,jsx}\"",
+    "coverage": "cross-env TSX_TSCONFIG_PATH=tsconfig.qunit.json NODE_OPTIONS=--import=tsx c8 --reporter=text --reporter=text-summary --reporter=html --all --src=src --include=\"src/**\" qunit --require ./test/setup.js \"test/**/test_*.{js,jsx}\""
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
@@ -20,6 +21,7 @@
   "devDependencies": {
     "@testing-library/dom": "10.4.2",
     "@testing-library/react": "16.3.3",
+    "c8": "12.0.0",
     "cross-env": "10.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.4.3",
