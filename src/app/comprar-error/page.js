@@ -1,6 +1,6 @@
 import ResultadoCompra from "@/components/compra/ResultadoCompra";
 
-export const metadata = { title: "Error en el pago | Tienda de Videojuegos" };
+export const metadata = { title: "Error en el pago | TCG Duoc" };
 
 export default function ErrorPagoPage() {
   return (

@@ -1,21 +1,39 @@
-// Categorías que se muestran en el Home (antes estaban escritas a mano en index.html)
+// Categorías que se muestran en el Home: son los tipos de las cartas Pokémon
 export const categorias = [
   {
-    id: 1,
-    nombre: "Acción",
-    descripcion: "Juegos llenos de adrenalina y emoción.",
-    imagen: "https://placehold.co/400x200?text=Accion",
+    "id": 1,
+    "nombre": "Fuego",
+    "descripcion": "Cartas de Pokémon de tipo fuego, como Charizard.",
+    "imagen": "https://images.pokemontcg.io/base1/4.png"
   },
   {
-    id: 2,
-    nombre: "Aventura",
-    descripcion: "Explora mundos fascinantes y vive historias épicas.",
-    imagen: "https://placehold.co/400x200?text=Aventura",
+    "id": 2,
+    "nombre": "Agua",
+    "descripcion": "Cartas de Pokémon de tipo agua, como Blastoise.",
+    "imagen": "https://images.pokemontcg.io/base1/2.png"
   },
   {
-    id: 3,
-    nombre: "Estrategia",
-    descripcion: "Desafía tu mente con estos juegos estratégicos.",
-    imagen: "https://placehold.co/400x200?text=Estrategia",
+    "id": 3,
+    "nombre": "Planta",
+    "descripcion": "Cartas de Pokémon de tipo planta, como Venusaur.",
+    "imagen": "https://images.pokemontcg.io/base1/15.png"
   },
+  {
+    "id": 4,
+    "nombre": "Eléctrico",
+    "descripcion": "Cartas de Pokémon de tipo eléctrico, como Pikachu.",
+    "imagen": "https://images.pokemontcg.io/base1/58.png"
+  },
+  {
+    "id": 5,
+    "nombre": "Psíquico",
+    "descripcion": "Cartas de Pokémon de tipo psíquico, como Mewtwo.",
+    "imagen": "https://images.pokemontcg.io/base1/10.png"
+  },
+  {
+    "id": 6,
+    "nombre": "Lucha",
+    "descripcion": "Cartas de Pokémon de tipo lucha, como Hitmonchan.",
+    "imagen": "https://images.pokemontcg.io/base1/7.png"
+  }
 ];

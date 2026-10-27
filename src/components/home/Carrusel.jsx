@@ -1,18 +1,29 @@
+import { productos } from "@/data/productos";
+
+// Busca un producto por su id para mostrar su carta en el slide
+function carta(id) {
+  return productos.find((p) => p.id === id);
+}
+
+// Cada slide tiene un degradado de fondo y 3 cartas (la del medio es más grande)
 const slides = [
   {
-    imagen: "/assets/img/banner.png",
-    titulo: "Nuevos Lanzamientos",
-    texto: "Descubre los últimos juegos disponibles en nuestra tienda.",
+    fondo: "linear-gradient(135deg, #E3350D, #FFCB05)",
+    cartas: [carta(5), carta(1), carta(9)],
+    titulo: "Bienvenido a TCG Duoc",
+    texto: "Cartas del Set Base de Pokémon",
   },
   {
-    imagen: "/assets/img/banner2.png",
+    fondo: "linear-gradient(135deg, #2A75BB, #8fd3f4)",
+    cartas: [carta(15), carta(18), carta(17)],
     titulo: "Ofertas Especiales",
-    texto: "Aprovecha nuestros descuentos exclusivos.",
+    texto: "Cartas holo con descuento",
   },
   {
-    imagen: "/assets/img/dino2.png",
-    titulo: "Juegos Más Vendidos",
-    texto: "Explora los títulos más populares entre nuestros clientes.",
+    fondo: "linear-gradient(135deg, #6a3fb5, #f78fb3)",
+    cartas: [carta(2), carta(4), carta(6)],
+    titulo: "Cartas Gratis",
+    texto: "Llévate una carta de energía gratis en tu compra",
   },
 ];
 
@@ -36,15 +47,32 @@ export default function Carrusel() {
       <div className="carousel-inner">
         {slides.map((slide, index) => (
           <div key={index} className={index === 0 ? "carousel-item active" : "carousel-item"}>
-            <img
-              src={slide.imagen}
-              className="d-block w-100"
-              alt={slide.titulo}
-              style={{ height: "350px", objectFit: "cover" }}
-            />
-            <div className="carousel-caption d-none d-md-block">
+            <div
+              className="d-flex justify-content-center align-items-center gap-3"
+              style={{ height: "350px", background: slide.fondo }}
+              role="img"
+              aria-label={slide.titulo}
+            >
+              {slide.cartas.map((c, i) => {
+                const medio = i === 1;
+                return (
+                  <img
+                    key={c.id}
+                    src={c.imagen}
+                    alt={c.nombre}
+                    className={medio ? "" : "d-none d-md-block"}
+                    style={{
+                      height: medio ? "270px" : "230px",
+                      filter: "drop-shadow(0 6px 8px rgba(0,0,0,0.45))",
+                    }}
+                  />
+                );
+              })}
+            </div>
+            {/* Fondo oscuro semitransparente para que el texto se lea sobre las cartas */}
+            <div className="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 px-3 py-2 mb-4">
               <h5>{slide.titulo}</h5>
-              <p>{slide.texto}</p>
+              <p className="mb-0">{slide.texto}</p>
             </div>
           </div>
         ))}

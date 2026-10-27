@@ -1,6 +1,6 @@
-# Mi Tienda
+# TCG Duoc
 
-Tienda de videojuegos hecha para el caso semestral de **DSY1104**. El proyecto parte de una plantilla en HTML, CSS, JavaScript y Bootstrap (con un carrito de compras en JavaScript y `localStorage`) y la migramos a **React con Next.js**: dividimos la página en componentes, armamos la navegación, hicimos los formularios con validación y escribimos pruebas para los componentes con **QUnit**.
+Tienda de cartas Pokémon TCG hecha para el caso semestral de **DSY1104**. Migramos la plantilla de tienda de videojuegos a una tienda de cartas del Set Base de Pokémon (nombre **TCG Duoc**). El proyecto parte de una plantilla en HTML, CSS, JavaScript y Bootstrap (con un carrito de compras en JavaScript y `localStorage`) y la migramos a **React con Next.js**: dividimos la página en componentes, armamos la navegación, hicimos los formularios con validación y escribimos pruebas para los componentes con **QUnit**.
 
 ## Integrantes y asignatura
 
@@ -72,7 +72,7 @@ Abrir http://localhost:3000 en el navegador.
 | `npm run dev` | Servidor de desarrollo en http://localhost:3000 |
 | `npm run build` | Genera la versión de producción |
 | `npm start` | Sirve la versión generada con `npm run build` |
-| `npm run lint` | Revisa el código con ESLint (hoy: 0 errores y 8 advertencias por usar `<img>` en vez de `next/image`) |
+| `npm run lint` | Revisa el código con ESLint (hoy: 0 errores y 7 advertencias por usar `<img>` en vez de `next/image`) |
 | `npm run api` | Fake-api en http://localhost:4000 |
 | `npm test` | Corre las pruebas con QUnit |
 
@@ -105,7 +105,7 @@ mi-tienda/
 ├── eslint.config.mjs        # Configuración de ESLint
 ├── tsconfig.qunit.json      # Configuración que usan las pruebas (JSX y alias "@/")
 ├── public/
-│   └── assets/img/          # Imágenes de la plantilla (banners, logo, avatar)
+│   └── assets/img/          # Logo propio en SVG (logo-tcg-duoc.svg)
 ├── src/
 │   ├── app/                 # Rutas (una carpeta por página, con su page.js)
 │   │   ├── layout.js        # Molde de todas las páginas (Navbar, Footer, CartProvider)
@@ -141,8 +141,8 @@ mi-tienda/
 │   │   ├── formato.js       # Formato de precios chilenos
 │   │   └── validaciones.js  # Reglas de validación de los formularios
 │   └── data/                # Datos fijos
-│       ├── categorias.js    # Categorías de la Home
-│       ├── productos.js     # Catálogo local de 20 productos
+│       ├── categorias.js    # Categorías de la Home (tipos de cartas)
+│       ├── productos.js     # Catálogo local de 20 cartas del Set Base
 │       └── zonas.js         # Regiones y comunas de Chile
 └── test/                    # Pruebas QUnit
     ├── setup.js             # Prepara jsdom para las pruebas de componentes
@@ -237,7 +237,7 @@ Hay 24 componentes en `src/components/`, agrupados por tema. En las tablas, el *
 | `Navbar` | Servidor | ninguna | Barra superior (logo, buscador, botones de sesión y, en celular, botón del carrito y botón del menú) y barra inferior de navegación (visible solo en pantallas grandes). También incluye el `MobileMenu`. |
 | `NavLink` | Cliente | `href`, `className`, `children` | Link que se marca como activo según la página actual (usa `usePathname`). |
 | `MobileMenu` | Cliente | ninguna | Menú lateral (offcanvas) para celulares con Iniciar sesión, Crear cuenta, Home, Categorías, Ofertas, Nosotros, Blog, Contacto y Carrito. Se cierra solo cuando cambia la ruta. |
-| `BotonCarrito` | Cliente | `className`, `compacto` | Botón verde con el total del carrito y la cantidad de productos (lee el contexto). Se usa en la barra de escritorio, en la barra superior del celular (versión `compacto`) y en el menú lateral. |
+| `BotonCarrito` | Cliente | `className`, `compacto` | Botón amarillo con el total del carrito y la cantidad de productos (lee el contexto). Se usa en la barra de escritorio, en la barra superior del celular (versión `compacto`) y en el menú lateral. |
 | `Footer` | Servidor | ninguna | Pie de página con el mapa de Google Maps. |
 
 ### `productos/`
@@ -377,7 +377,7 @@ De forma indirecta también se prueban `CartProvider`, `useCarrito`, `BotonAgreg
 # fail 0
 ```
 
-Las **82 pruebas pasan** sin fallas. Además, `npm run build` compila sin errores y `npm run lint` termina con 0 errores (8 advertencias por usar `<img>`).
+Las **82 pruebas pasan** sin fallas. Además, `npm run build` compila sin errores y `npm run lint` termina con 0 errores (7 advertencias por usar `<img>`).
 
 ## Flujo de trabajo con Git y Trello
 
@@ -424,6 +424,7 @@ Cada tarea se integra con un Pull Request hacia `Desarrollo` que **revisa y apru
 | #11 | `tarea/menu-movil` | Carrito y todos los links en el menú del celular |
 | #12 | `tarea/arreglo-dependencias` | Arreglo de la versión de `jsdom` para que `npm install` funcione en una instalación limpia |
 | #13 | `tarea/documentacion` | Este README |
+| #14 | `tarea/personalizacion` | Temática Pokémon: nombre TCG Duoc, cartas, categorías por tipo, colores, logo y mapa de Duoc Maipú |
 
 Los mensajes de commit son cortos y describen lo que se hizo (por ejemplo, "Agrego el navbar y el footer como componentes").
 
@@ -450,7 +451,10 @@ Nos organizamos con un tablero de Trello: [mi-tienda-Fullstack2](https://trello.
 
 ## Limitaciones conocidas
 
-- El inicio de sesión y el registro son simulados: no hay sesión de usuario ni perfil, y los datos no se guardan.
+- El inicio de sesión y el registro son simulados (validan los datos, pero no hay sesión de usuario ni perfil), igual que en la plantilla original, donde los usuarios estaban escritos en el código y el perfil era solo diseño.
 - Solo la Home usa la fake-api; el detalle de producto, Ofertas, Categorías y el carrito usan `src/data/productos.js`.
 - El buscador del navbar todavía no filtra productos y los links de las categorías llevan a `/categorias` completo.
-- Las páginas Nosotros y Blog tienen contenido de relleno.
+
+## Créditos de imágenes
+
+Las imágenes de las cartas vienen de la Pokémon TCG API (https://pokemontcg.io). Pokémon y sus marcas pertenecen a Nintendo, Creatures y GAME FREAK / The Pokémon Company. Este es un proyecto académico sin fines comerciales. El logo (`public/assets/img/logo-tcg-duoc.svg`) es de creación propia.

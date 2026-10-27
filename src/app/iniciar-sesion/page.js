@@ -1,6 +1,6 @@
 import LoginForm from "@/components/auth/LoginForm";
 
-export const metadata = { title: "Iniciar sesión | Tienda de Videojuegos" };
+export const metadata = { title: "Iniciar sesión | TCG Duoc" };
 
 export default function IniciarSesion() {
   return (

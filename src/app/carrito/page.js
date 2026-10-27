@@ -1,6 +1,6 @@
 import TablaCarrito from "@/components/carrito/TablaCarrito";
 
-export const metadata = { title: "Carrito | Tienda de Videojuegos" };
+export const metadata = { title: "Carrito | TCG Duoc" };
 
 export default function CarritoPage() {
   return (

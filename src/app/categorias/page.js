@@ -3,7 +3,7 @@ import ProductGrid from "@/components/productos/ProductGrid";
 import { categorias } from "@/data/categorias";
 import { productos } from "@/data/productos";
 
-export const metadata = { title: "Categorías | Tienda de Videojuegos" };
+export const metadata = { title: "Categorías | TCG Duoc" };
 
 export default function Categorias() {
   return (

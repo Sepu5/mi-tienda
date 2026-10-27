@@ -4,8 +4,7 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import BotonCarrito from "./BotonCarrito";
-
-const categorias = ["Acción", "Aventura", "Estrategia"];
+import { categorias } from "@/data/categorias";
 
 // Menú lateral (offcanvas) que se abre en celulares con el botón de la Navbar.
 export default function MobileMenu() {
@@ -60,8 +59,8 @@ export default function MobileMenu() {
                 <div id="collapseCategorias" className="accordion-collapse collapse" data-bs-parent="#accordionMenu">
                   <ul className="list-group">
                     {categorias.map((categoria) => (
-                      <li key={categoria} className="list-group-item">
-                        <Link href="/categorias" className="link-none">{categoria}</Link>
+                      <li key={categoria.id} className="list-group-item">
+                        <Link href="/categorias" className="link-none">{categoria.nombre}</Link>
                       </li>
                     ))}
                   </ul>
@@ -74,7 +73,7 @@ export default function MobileMenu() {
           <li className="list-group-item"><Link href="/blog" className="link-none">Blog</Link></li>
           <li className="list-group-item"><Link href="/contacto" className="link-none">Contacto</Link></li>
           <li className="list-group-item">
-            <BotonCarrito className="btn btn-success w-100" />
+            <BotonCarrito className="btn btn-poke w-100" />
           </li>
         </ul>
       </div>

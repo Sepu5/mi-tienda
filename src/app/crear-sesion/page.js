@@ -1,6 +1,6 @@
 import RegistroForm from "@/components/auth/RegistroForm";
 
-export const metadata = { title: "Crear cuenta | Tienda de Videojuegos" };
+export const metadata = { title: "Crear cuenta | TCG Duoc" };
 
 export default function CrearSesion() {
   return (

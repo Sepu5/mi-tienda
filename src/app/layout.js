@@ -8,8 +8,8 @@ import AvisoCarrito from "@/components/carrito/AvisoCarrito";
 import { CartProvider } from "@/context/CartContext";
 
 export const metadata = {
-  title: "Tienda de Videojuegos",
-  description: "Tienda en línea de videojuegos",
+  title: "TCG Duoc",
+  description: "Tienda de cartas Pokémon TCG",
 };
 
 // El layout es el "molde" de todas las páginas.

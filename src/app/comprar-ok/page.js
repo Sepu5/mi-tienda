@@ -1,6 +1,6 @@
 import ResultadoCompra from "@/components/compra/ResultadoCompra";
 
-export const metadata = { title: "Compra exitosa | Tienda de Videojuegos" };
+export const metadata = { title: "Compra exitosa | TCG Duoc" };
 
 export default function CompraExitosaPage() {
   return (
