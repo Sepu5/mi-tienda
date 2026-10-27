@@ -4,14 +4,17 @@ import Link from "next/link";
 import { useCarrito } from "@/context/CartContext";
 import { formatearPrecio } from "@/lib/formato";
 
-// Botón verde del navbar: muestra el total y la cantidad de productos del carrito.
-export default function BotonCarrito() {
+// Botón del carrito: muestra el total y la cantidad de productos del carrito.
+// `compacto` deja solo el ícono y el total (para la barra del celular).
+export default function BotonCarrito({ className = "btn btn-success ms-5", compacto = false }) {
   const { total, cantidadTotal } = useCarrito();
 
   return (
-    <Link className="btn btn-success ms-5" href="/carrito">
+    <Link className={className} href="/carrito">
       <strong>
-        <i className="bi bi-cart4"></i> Carrito {formatearPrecio(total)}
+        <i className="bi bi-cart4"></i>
+        {compacto ? " " : " Carrito "}
+        {formatearPrecio(total)}
       </strong>
       {cantidadTotal > 0 && <span className="badge text-bg-light ms-2">{cantidadTotal}</span>}
     </Link>

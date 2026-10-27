@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import BotonCarrito from "./BotonCarrito";
 
 const categorias = ["Acción", "Aventura", "Estrategia"];
 
@@ -33,31 +34,14 @@ export default function MobileMenu() {
       </div>
 
       <div className="offcanvas-body">
-        {/* Tarjeta del usuario */}
-        <div className="card">
-          <div className="row g-0">
-            <div className="col-4 d-flex align-items-center justify-content-center">
-              <img src="/assets/img/face-programador2.png" alt="Avatar" className="avatar rounded-pill" />
-            </div>
-            <div className="col-8">
-              <div className="card-body">
-                <h5 className="card-title">Nombre del Usuario</h5>
-                <p className="card-text">correo@ejemplo.com</p>
-                <div className="d-flex justify-content-between">
-                  <Link href="#" className="btn btn-primary btn-sm">Ver Perfil</Link>
-                  <Link href="#" className="btn btn-danger btn-sm">Cerrar Sesión</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className="d-flex my-3">
           <Link href="/iniciar-sesion" className="btn btn-outline-primary ms-2">Iniciar Sesión</Link>
           <Link href="/crear-sesion" className="btn btn-primary ms-2">Crear Cuenta</Link>
         </div>
 
+        {/* Mismos links que la barra de escritorio, más el carrito */}
         <ul className="list-group">
+          <li className="list-group-item"><Link href="/" className="link-none">Home</Link></li>
           <li className="list-group-item">
             <div className="accordion accordion-flush" id="accordionMenu">
               <div className="accordion-item">
@@ -86,7 +70,12 @@ export default function MobileMenu() {
             </div>
           </li>
           <li className="list-group-item"><Link href="/ofertas" className="link-none">Ofertas</Link></li>
-          <li className="list-group-item"><Link href="#" className="link-none">Historial</Link></li>
+          <li className="list-group-item"><Link href="/nosotros" className="link-none">Nosotros</Link></li>
+          <li className="list-group-item"><Link href="/blog" className="link-none">Blog</Link></li>
+          <li className="list-group-item"><Link href="/contacto" className="link-none">Contacto</Link></li>
+          <li className="list-group-item">
+            <BotonCarrito className="btn btn-success w-100" />
+          </li>
         </ul>
       </div>
     </div>
