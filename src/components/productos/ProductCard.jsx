@@ -1,9 +1,6 @@
 import Link from "next/link";
-
-// Da formato chileno al precio: 5999 -> "$ 5.999"
-function formatearPrecio(precio) {
-  return "$ " + precio.toLocaleString("es-CL");
-}
+import BotonAgregar from "@/components/carrito/BotonAgregar";
+import { formatearPrecio } from "@/lib/formato";
 
 // Tarjeta de un producto. Recibe el producto por props, igual que ProductRow en hola-mundo.
 export default function ProductCard({ producto }) {
@@ -25,9 +22,11 @@ export default function ProductCard({ producto }) {
             <span className="precio-nuevo fw-bolder">
               {esGratis ? "FREE" : formatearPrecio(producto.precio_nuevo)}
             </span>
+            <small className="text-muted">Stock disponible: {producto.stock}</small>
           </div>
-          <div className="d-grid mt-auto">
-            <Link className="btn btn-dark" href={`/productos/${producto.id}`}>Ver</Link>
+          <div className="d-grid gap-2 mt-auto">
+            <Link className="btn btn-outline-dark" href={`/productos/${producto.id}`}>Ver</Link>
+            <BotonAgregar producto={producto} />
           </div>
         </div>
       </div>
