@@ -1,10 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { productos } from "@/data/productos";
-
-function formatearPrecio(precio) {
-  return "$ " + precio.toLocaleString("es-CL");
-}
+import BotonAgregar from "@/components/carrito/BotonAgregar";
+import { formatearPrecio } from "@/lib/formato";
 
 export default async function ProductoDetalle({ params }) {
   const { id } = await params;
@@ -44,6 +42,8 @@ export default async function ProductoDetalle({ params }) {
           </p>
 
           <p>Stock: {producto.stock}</p>
+
+          <BotonAgregar producto={producto} className="btn btn-success btn-lg" />
         </div>
       </div>
     </div>
