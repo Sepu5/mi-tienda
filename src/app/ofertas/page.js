@@ -1,7 +1,7 @@
 import ProductGrid from "@/components/productos/ProductGrid";
 import { productos } from "@/data/productos";
 
-export const metadata = { title: "Ofertas | Tienda de Videojuegos" };
+export const metadata = { title: "Ofertas | TCG Duoc" };
 
 export default function Ofertas() {
   const enOferta = productos.filter((p) => p.precio_descuento > p.precio_nuevo);

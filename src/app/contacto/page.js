@@ -1,6 +1,6 @@
 import ContactoForm from "@/components/contacto/ContactoForm";
 
-export const metadata = { title: "Contacto | Tienda de Videojuegos" };
+export const metadata = { title: "Contacto | TCG Duoc" };
 
 export default function Contacto() {
   return (

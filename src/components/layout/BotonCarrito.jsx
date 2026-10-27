@@ -6,7 +6,7 @@ import { formatearPrecio } from "@/lib/formato";
 
 // Botón del carrito: muestra el total y la cantidad de productos del carrito.
 // `compacto` deja solo el ícono y el total (para la barra del celular).
-export default function BotonCarrito({ className = "btn btn-success ms-5", compacto = false }) {
+export default function BotonCarrito({ className = "btn btn-poke ms-5", compacto = false }) {
   const { total, cantidadTotal } = useCarrito();
 
   return (

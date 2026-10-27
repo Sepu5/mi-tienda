@@ -1,6 +1,6 @@
 import FormularioCompra from "@/components/compra/FormularioCompra";
 
-export const metadata = { title: "Comprar | Tienda de Videojuegos" };
+export const metadata = { title: "Comprar | TCG Duoc" };
 
 export default function ComprarPage() {
   return (

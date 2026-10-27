@@ -1,29 +1,29 @@
-export const metadata = { title: "Blog | Tienda de Videojuegos" };
+export const metadata = { title: "Blog | TCG Duoc" };
 
 const entradas = [
   {
     id: 1,
-    titulo: "Los 5 juegos retro que no pueden faltar en tu colección",
+    titulo: "Las cartas más buscadas del Set Base",
     fecha: "12 de octubre de 2026",
-    autor: "Luis",
+    autor: "Equipo TCG Duoc",
     texto:
-      "Coleccionar videojuegos clásicos es una aventura en sí misma. En esta lista repasamos cinco títulos que marcaron una época y que siguen siendo igual de entretenidos hoy.",
+      "Charizard, Blastoise y Venusaur lideran la lista de las cartas holo más buscadas del Set Base de 1999. Repasamos por qué siguen siendo las favoritas de los coleccionistas.",
   },
   {
     id: 2,
-    titulo: "Cómo cuidar tus cartuchos y consolas antiguas",
+    titulo: "Cómo cuidar tus cartas: fundas y carpetas",
     fecha: "5 de octubre de 2026",
-    autor: "Equipo RetroGaming Haven",
+    autor: "Equipo TCG Duoc",
     texto:
-      "Mantén los cartuchos lejos de la humedad, límpialos con alcohol isopropílico y guarda las consolas en un lugar fresco y seco.",
+      "Usa fundas protectoras, guárdalas en carpetas con hojas sin PVC y mantenlas lejos de la humedad y del sol para que conserven su estado.",
   },
   {
     id: 3,
-    titulo: "Novedades de la tienda: llegaron los packs de ofertas",
+    titulo: "Novedades de TCG Duoc: carta de energía gratis",
     fecha: "28 de septiembre de 2026",
-    autor: "Equipo RetroGaming Haven",
+    autor: "Equipo TCG Duoc",
     texto:
-      "Este mes sumamos nuevos packs de juegos con descuentos de hasta un 40%. Revisa la sección de Ofertas.",
+      "Ahora puedes llevarte una carta de energía gratis en tu compra. Revisa la sección de Ofertas para ver las cartas holo con descuento.",
   },
 ];
 
@@ -32,7 +32,7 @@ export default function Blog() {
     <div className="container py-5">
       <h1 className="mb-2">Blog</h1>
       <p className="text-muted mb-4">
-        Novedades, reseñas y noticias del mundo de los videojuegos.
+        Noticias y consejos del mundo Pokémon TCG
       </p>
 
       <div className="row">
