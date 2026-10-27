@@ -21,6 +21,7 @@ function dibujar() {
   );
 }
 
+// Mock: el localStorage de jsdom se precarga con productos (setItem) para simular un carrito guardado
 QUnit.module("TestTablaCarrito", function (hooks) {
     hooks.afterEach(function () {
         cleanup();
